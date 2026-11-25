@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduSimplify AI - Smart Learning Assistant</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Markdown formatting library -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>🎓 EduSimplify AI</h1>
+    <p>Your Smart AI Learning Assistant</p>
+</header>
+
+<main class="container">
+
+    <!-- Welcome Section -->
+    <section class="welcome">
+        <h2>Welcome to EduSimplify AI!</h2>
+        <p>Transform difficult study materials into simple explanations.</p>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section class="chat-box">
+
+        <label for="task">Select Learning Task</label>
+
+        <select id="task">
+            <option value="Simplify">Simple Explanation</option>
+            <option value="2-Mark">2-Mark Answer</option>
+            <option value="13-Mark">13-Mark Answer</option>
+            <option value="MCQ">Multiple Choice Questions</option>
+            <option value="Summary">Lesson Summary</option>
+            <option value="Quiz">Practice Quiz</option>
+        </select>
+
+        <label for="language">Select Language</label>
+
+        <select id="language">
+            <option value="English">English</option>
+            <option value="Tamil">Tamil</option>
+        </select>
+
+        <label for="message">Enter Your Topic or Study Content</label>
+
+        <textarea
+            id="message"
+            rows="6"
+            placeholder="Enter your textbook content or topic here..."
+        ></textarea>
+
+        <button id="sendButton" onclick="sendMessage()">
+            ✨ Generate Explanation
+        </button>
+
+        <p id="loading" hidden>
+            ⏳ Generating your answer. Please wait...
+        </p>
+
+        <h3>📖 Your Learning Result</h3>
+
+        <div id="response">
+            Your AI-generated answer will appear here.
+        </div>
+
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+
+        <h2>Our Features</h2>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+                📘 Simple English Explanation
+            </div>
+
+            <div class="feature">
+                🌐 Tamil Explanation
+            </div>
+
+            <div class="feature">
+                📝 2-Mark Answers
+            </div>
+
+            <div class="feature">
+                📚 13-Mark Answers
+            </div>
+
+            <div class="feature">
+                ❓ MCQ Generation
+            </div>
+
+            <div class="feature">
+                🎯 Practice Quizzes
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>EduSimplify AI | Intelligent Learning Assistant</p>
+    <p>Powered by IBM watsonx Orchestrate</p>
+</footer>
+
+<script>
+
+async function sendMessage() {
+
+    const message = document.getElementById("message").value.trim();
+
+    const language = document.getElementById("language").value;
+
+    const task = document.getElementById("task").value;
+
+    const responseBox = document.getElementById("response");
+
+    const loading = document.getElementById("loading");
+
+    const button = document.getElementById("sendButton");
+
+    if (!message) {
+        responseBox.textContent = "Please enter your study topic.";
+        return;
+    }
+
+    loading.hidden = false;
+
+    button.disabled = true;
+
+    button.textContent = "Generating...";
+
+    responseBox.textContent = "";
+
+    try {
+
+        const result = await fetch("/api/chat", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                message: message,
+                language: language,
+                task: task
+            })
+
+        });
+
+        const data = await result.json();
+
+        if (!result.ok) {
+            throw new Error(data.reply || "Request failed.");
+        }
+
+        const answer = typeof data.reply === "string"
+            ? data.reply
+            : JSON.stringify(data.reply, null, 2);
+
+        if (typeof marked !== "undefined") {
+
+            responseBox.innerHTML = marked.parse(answer);
+
+        } else {
+
+            responseBox.textContent = answer;
+
+        }
+
+    } catch (error) {
+
+        responseBox.textContent =
+            "Unable to connect: " + error.message;
+
+        console.error("EduSimplify AI Error:", error);
+
+    } finally {
+
+        loading.hidden = true;
+
+        button.disabled = false;
+
+        button.textContent = "✨ Generate Explanation";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

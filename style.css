@@ -1,0 +1,229 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #fff5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #8b0000, #e63946);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+    border-bottom: 6px solid #ffb3b3;
+    box-shadow: 0 4px 15px rgba(120, 0, 0, 0.2);
+}
+
+header h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+header p {
+    font-size: 17px;
+    color: #ffe5e5;
+}
+
+/* Main container */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+/* Welcome section */
+.welcome {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-left: 7px solid #c1121f;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(100, 0, 0, 0.08);
+}
+
+.welcome h2 {
+    color: #a00000;
+    border-bottom: 2px solid #ffb3b3;
+    display: inline-block;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+}
+
+/* Chat section */
+.chat-box {
+    background: white;
+    padding: 30px;
+    border: 2px solid #f2b6b6;
+    border-radius: 15px;
+    border-top: 6px solid #c1121f;
+    box-shadow: 0 5px 20px rgba(120, 0, 0, 0.10);
+}
+
+.chat-box label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #8b0000;
+}
+
+.chat-box select,
+.chat-box textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1.5px solid #e5a0a0;
+    border-radius: 9px;
+    background: #fffafa;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.chat-box select:focus,
+.chat-box textarea:focus {
+    border-color: #c1121f;
+    box-shadow: 0 0 7px rgba(193, 18, 31, 0.2);
+}
+
+.chat-box textarea {
+    resize: vertical;
+}
+
+/* Generate button */
+#sendButton {
+    width: 100%;
+    margin-top: 22px;
+    padding: 15px;
+    background: linear-gradient(135deg, #a00000, #e63946);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#sendButton:hover {
+    background: #780000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(120, 0, 0, 0.2);
+}
+
+#sendButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Loading */
+#loading {
+    color: #c1121f;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Result heading */
+.chat-box h3 {
+    color: #a00000;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    padding: 10px 15px;
+    border-left: 5px solid #c1121f;
+    border-bottom: 2px solid #f2b6b6;
+    background: #fff5f5;
+    border-radius: 6px;
+}
+
+/* AI response */
+#response {
+    background: #fffafa;
+    border: 1.5px solid #e5a0a0;
+    border-left: 6px solid #c1121f;
+    border-radius: 10px;
+    padding: 22px;
+    min-height: 120px;
+    margin-top: 12px;
+    overflow-wrap: anywhere;
+}
+
+/* Features */
+.features {
+    margin-top: 35px;
+    padding: 28px;
+    background: white;
+    border-radius: 15px;
+    border-top: 6px solid #c1121f;
+    box-shadow: 0 5px 20px rgba(120, 0, 0, 0.08);
+}
+
+.features h2 {
+    color: #a00000;
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #ffb3b3;
+    padding-bottom: 12px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feature {
+    background: #fff5f5;
+    border: 1px solid #f0b5b5;
+    border-left: 5px solid #c1121f;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.feature:hover {
+    background: #ffe3e3;
+    transform: translateY(-4px);
+    box-shadow: 0 5px 12px rgba(120, 0, 0, 0.12);
+}
+
+/* Footer */
+footer {
+    margin-top: 40px;
+    padding: 22px;
+    text-align: center;
+    background: #780000;
+    color: white;
+    border-top: 5px solid #e63946;
+}
+
+/* Mobile design */
+@media (max-width: 700px) {
+    header h1 {
+        font-size: 27px;
+    }
+
+    .container {
+        width: 94%;
+        margin: 20px auto;
+    }
+
+    .chat-box,
+    .features {
+        padding: 18px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
